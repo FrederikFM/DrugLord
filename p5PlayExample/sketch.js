@@ -1,52 +1,89 @@
-let PlayerName = "SuperPlayer1489";
-let MoneyBalance = 4342420;
+new p5();
 
-let logoImg; let back1Img; let back2Img; let worldImg;
-let TextR = 50; let TextG = 200; let TextB = 50;
+let playerName = "PlayerName";
+let moneyBalance = 420;
 
-/*function preLoad() {
-  logoImg = loadImage('logo.jpg');
-  back1Img = loadImage('back1.jpg');
-  back2Img = loadImage('assets/back2.jpg');
-  worldImg = loadImage('assets/world.jpg');
-}*/
+let logoImg; let back1Img; let back2Img; let worldImg; let heroinImg;
+let textR = 255; let textG = 255; let textB = 255;
 
+function preload() {
+  logoImg = loadImage("https://i.ibb.co/RSyXNRH/logo.png");
+  back1Img = loadImage("https://i.ibb.co/fnkXZZM/back1.png");
+  back2Img = loadImage("https://i.ibb.co/BVvJzYx/back2.png");
+  worldImg = loadImage("https://i.ibb.co/QF3Wrcs/worldmap.png");
+  heroinImg = loadImage("https://i.ibb.co/B6Mxh4q/Kanyle.png");
+  garageImg = loadImage("https://i.ibb.co/LJcJRzc/garage.png");
+  houseImg = loadImage("https://i.ibb.co/7vnVFFZ/hus.png");
+  labImg = loadImage("https://i.ibb.co/jg50VFz/LAB-BAGGRUND.png");
+}
 function setup() {
+  frameRate(60);
   playerStartMenu = true;
-  playerWorldMenu = false;
-  playerStateMenu = false;
-  playerHouseMenu = false;
 }
 
 function draw() {
   createCanvas(windowWidth, windowHeight);
   background(255);
+  imageMode(CENTER)
+  image(back1Img,width/2,height/2,1920,1080);
   loadMenu();
+  drugCookDetection();
 }
-function topBarUI() {
-  rect(width/2,0,width,height/7.5)
-}
-function bottomUI() {
-  rectMode(CENTER);
-  fill(50);
-  rect(width/2,height-height/10,width,200)
-}
+
 function styling() {
-  fill(TextR,TextG,TextB);
+  fill(textR,textG,textB);
   textStyle(BOLD);
   textAlign(CENTER);
-  textFont('Georgia');
-  imageMode(CENTER);
+  textFont('Roboto');
+  ellipseMode(CENTER);
+  rectMode(CENTER);
 }
-function playerName() {
+
+function topBottomUI() {
+  rectMode(CORNERS);
+  fill(40,40,40,250);
+  rect(0,0,width,height*0.06)
+  rect(0,height,width,height*0.85)
+}
+function playerInfoUI() {
   styling();
   textAlign(LEFT);
-  textSize(width/70);
-  text(PlayerName,width/60,height/24);
-}
-function balance() {
+  textSize(windowHeight/35);
+  text(playerName,width/60,height/24);
   styling();
   textAlign(RIGHT);
-  textSize(width/70);
-  text("$"+MoneyBalance,width-width/60,height/24);
+  textSize(windowHeight/35);
+  text("$"+moneyBalance,width-width/60,height/24);
+}
+function backButtonUI() {
+  fill(230,230,230,230);
+  ellipseMode(CENTER);
+  ellipse(width-height*0.075,height*0.925,75,75);
+  styling();
+  fill(0,0,0,255)
+  textSize(17.5)
+  textAlign(CENTER);
+  text("BACK",width-height*0.075,height*0.9325);
+}
+function standardButtonUI(t,x,c) {
+  fill(c,c,c,230);
+  ellipseMode(CENTER);
+  ellipse(x,height*0.925,75,75);
+  styling();
+  fill(0,0,0,255)
+  textSize(17.5)
+  textAlign(CENTER);
+  fill(250,250,250,250)
+  text(t,x,height*0.9325);
+}
+function standardMenuUI() {
+    fill(40,40,40,240);
+    rect(width/2,height*0.45,width*0.9,height*0.6);
+}
+function standardMenuTitleUI(t) {
+    styling();
+    fill(30,30,30,255)
+    rect(width/2,height*0.695,135,35);
+    fill(250,250,250,250)
+    text(t,width/2,height*0.7);
 }
