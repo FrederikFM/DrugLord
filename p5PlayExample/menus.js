@@ -20,10 +20,11 @@ let labMenu1 = false;
 let labMenu2 = false;
 let garageMenu1 = false;
 let garageMenu2 = false;
+let garageMenu3 = false;
 
 
 
-//SWITCH TO LAST MENU FUNCTIONS
+//Last Menu
 function lastMenu() {
     //Main Menu's
     if (playerStateMenu) {playerWorldMenu = true; playerStateMenu = false} else
@@ -42,7 +43,7 @@ function lastMenu() {
   
 }
 
-//SWITCH TO NEXT MENU FUNCTIONS
+//Next Menu
 function nextMenu() {
     //Main Menu's
     if (playerStartMenu) {playerWorldMenu = true; playerStartMenu = false} else
@@ -58,7 +59,7 @@ function nextMenu() {
     if (playerHouseMenu && mouseX > width*0.66) {playerGarageMenu = true; playerHouseMenu = false}
 }
 
-//WHAT MENU TO DRAW
+//Load The Menus
 function loadMenu() {
     if (playerStartMenu) {loadStartMenu()} else
     if (playerWorldMenu) {loadWorldMenu()} else
@@ -72,8 +73,6 @@ function loadMenu() {
     if (playerGarageMenu) {loadGarageMenu()}
 }
 
-//DRAWING MENU'S
-//Main Menu's
 function loadStartMenu() {
     image(logoImg,width/2,height/2,800,450);
     //UI
@@ -138,180 +137,35 @@ function loadPropertyMenu() {
     //EMPTY
 }
 
-//House Menu's
-function loadOfficeMenu() {
-    //UI
-    topBottomUI();
-    playerInfoUI();
-    backButtonUI();
-    styling();
-    //Title
-    textSize(windowHeight/35);
-    text("Office",windowWidth*0.5,windowHeight/24);
-    //Buttons
-    standardButtonUI("Import",60,60);
-    standardButtonUI("Export",150,60);
-    standardButtonUI("Stats",240,60);
-    //Office Menu's
-    if (officeMenu1 == true) {
-        standardMenuUI();
-        standardMenuTitleUI("Import");
-        //Display Drugs for Purchase
-        image(heroinImg,width*0.2,height*0.4,64,64)
-        //Display Price on Drugs
-        styling();
-        text("$"+heroinBuyPrice,width*0.2,height*0.5);
-    }
-    if (officeMenu2 == true) {
-        standardMenuUI();
-        standardMenuTitleUI("Export");
-        //Display Drugs for Selling
-        image(heroinImg,width*0.2,height*0.4,64,64)
-        //Display Price on Drugs
-        styling();
-        text("$"+heroinSellPrice,width*0.2,height*0.5);
-    }
-    if (officeMenu3 == true) {
-        standardMenuUI();
-        standardMenuTitleUI("Stats");
-    }
-}
-function loadLabMenu() {
-    imageMode(CENTER)
-    image(labImg,width/2,height/2,1920,1080);
-    //UI
-    topBottomUI();
-    playerInfoUI();
-    backButtonUI();
-    styling();
-    //Title
-    textSize(windowHeight/35);
-    text("Lab",windowWidth*0.5,windowHeight/24);
-    //Buttons
-    standardButtonUI("Stash",60,60);
-    standardButtonUI("Cook",150,60);
-    //Lab Menu's
-    if (labMenu1 == true) {
-        standardMenuUI();
-        standardMenuTitleUI("Stash");
-        //Display Drugs
-        image(heroinImg,width*0.2,height*0.4,64,64)
-        //Display Inventory in Amounts
-        styling();
-        text("Ingredients "+heroinBuyInventory,width*0.2,height*0.5);
-        text("Product "+heroinSellInventory,width*0.2,height*0.53);
-    }
-    if (labMenu2 == true) {
-        standardMenuUI();
-        standardMenuTitleUI("Cook");
-        //Display Drugs available for Produce
-        image(heroinImg,width*0.2,height*0.4,64,64)
-        //Display Time to Make
-        styling();
-        text("Time to make",width*0.2,height*0.5);
-        text(heroinProduceTime + " Seconds",width*0.2,height*0.53);
-    }
-}
-function loadGarageMenu() {
-    imageMode(CENTER)
-    image(garageImg,width/2,height/2,1920,1080);
-    //UI
-    topBottomUI();
-    playerInfoUI();
-    backButtonUI();
-    styling();
-    //Title
-    textSize(windowHeight/35);
-    text("Garage",windowWidth*0.5,windowHeight/24);
-    //Buttons
-    standardButtonUI("Cars",60,60);
-    standardButtonUI("Sell",150,60);
-    //Garage Menu's
-    if (garageMenu1 == true) {
-        standardMenuUI();
-        standardMenuTitleUI("Cars");
-    }
-    if (garageMenu2 == true) {
-        standardMenuUI();
-        standardMenuTitleUI("Sell");
-    }
-}
-
 //MENU SWITCH TRIGGERS
-function mousePressed() {
+function mousePressedMenus() {
     //Next Menu
     if (mouseY < height*0.85) {
-    nextMenu();
+        nextMenu();
     }
     //Last Menu
     if (mouseX > width-height*0.15 && mouseY > height*0.85) {
         lastMenu();
     }
     //Menu Button Pressed
+  
     //Button 1
-    if (mouseX > 60-32.5 && mouseX < 60+32.5 && mouseY > height*0.925-32.5 && mouseY < height*0.925+32.5) {
-        if (playerOfficeMenu) {
-            closeOLGMenus();
-            officeMenu1 = true;
-        }
-        if (playerLabMenu) {
-            closeOLGMenus();
-            labMenu1 = true;
-        }
-        if (playerGarageMenu) {
-            closeOLGMenus();
-            garageMenu1 = true;
-        }
+    if (mouseX > button1x-32.5 && mouseX < button1x+32.5 && mouseY > height*0.925-32.5 && mouseY < height*0.925+32.5) {
+        if (playerOfficeMenu) {closeOLGMenus(); officeMenu1 = true;}
+        if (playerLabMenu) {closeOLGMenus(); labMenu1 = true;}
+        if (playerGarageMenu) {closeOLGMenus(); garageMenu1 = true;}
     }
     //Button 2
-    if (mouseX > 150-32.5 && mouseX < 150+32.5 && mouseY > height*0.925-32.5 && mouseY < height*0.925+32.5) {
-        if (playerOfficeMenu) {
-            closeOLGMenus();
-            officeMenu2 = true;
-        }
-        if (playerLabMenu) {
-            closeOLGMenus();
-            labMenu2 = true;
-        }
-        if (playerGarageMenu) {
-            closeOLGMenus();
-            garageMenu2 = true;
-        }
+    if (mouseX > button2x-32.5 && mouseX < button2x+32.5 && mouseY > height*0.925-32.5 && mouseY < height*0.925+32.5) {
+        if (playerOfficeMenu) {closeOLGMenus(); officeMenu2 = true;}
+        if (playerLabMenu) {closeOLGMenus(); labMenu2 = true;}
+        if (playerGarageMenu) {closeOLGMenus(); garageMenu2 = true;}
     }
     //Button 3
-    if (mouseX > 240-32.5 && mouseX < 240+32.5 && mouseY > height*0.925-32.5 && mouseY < height*0.925+32.5) {
-        if (playerOfficeMenu) {
-            closeOLGMenus();
-            officeMenu3 = true;
-        }
-    }
-    //OFFICE IMPORT - Click on Drug
-    if (mouseX > width*0.2-32 && mouseX < width*0.2+32 && mouseY > height*0.4-32 && mouseY < height*0.4+32) {
-        if (officeMenu1) {
-            if (moneyBalance >= heroinBuyPrice) {
-                moneyBalance = moneyBalance - heroinBuyPrice;
-                heroinBuyInventory++;
-            }
-        }
-        if (officeMenu2) {
-            if (heroinSellInventory >= 1) {
-                heroinSellInventory--;
-                moneyBalance = moneyBalance + heroinSellPrice;
-            }
-        }
-    }
-    //LAB PRODUCE
-    if (mouseX > width*0.2-32 && mouseX < width*0.2+32 && mouseY > height*0.4-32 && mouseY < height*0.4+32) {
-        if (labMenu1) {
-            
-        }
-        if (labMenu2) {
-            if (heroinBuyInventory >= 1 && cookArray.length <= 4) {
-                heroinBuyInventory--;
-                temp = new Heroin();
-                cookArray.push(temp);
-            }
-        }
+    if (mouseX > button3x-32.5 && mouseX < button3x+32.5 && mouseY > height*0.925-32.5 && mouseY < height*0.925+32.5) {
+        if (playerOfficeMenu) {closeOLGMenus(); officeMenu3 = true;}
+        if (playerLabMenu) {closeOLGMenus(); labMenu3 = true;}
+        if (playerGarageMenu) {closeOLGMenus(); garageMenu3 = true;}
     }
 }
 
@@ -323,4 +177,5 @@ function closeOLGMenus() {
     labMenu2 = false;
     garageMenu1 = false;
     garageMenu2 = false;
+    garageMenu3 = false;
 }

@@ -1,85 +1,48 @@
-//Drug Inventory (Amounts)
-let heroinBuyInventory = 0;
-let weedBuyInventory = 0;
-let cokeBuyInventory = 0;
-let mdmaBuyInventory = 0;
+let drugArray = [
 
-//Product Inventory (Amounts)
-let heroinSellInventory = 0;
-let weedSellInventory = 0;
-let cokeSellInventory = 0;
-let mdmaSellInventory = 0;
-
-//Drug Buy Prices
-let heroinBuyPrice = 40;
-let weedBuyPrice = 12;
-let cokeBuyPrice = 65;
-let mdmaBuyPrice = 45;
-
-//Product Sell Prices
-let heroinSellPrice = heroinBuyPrice*1.35;
-let weedSellPrice = weedBuyPrice*1.3;
-let cokeSellPrice = cokeBuyPrice*1.45;
-let mdmaSellPrice = mdmaBuyPrice*1.375;
-
-//Drug Produce Time !!!Miliseconds!!!
-let heroinProduceTime = heroinBuyPrice*100;
-let weedProduceTime = weedBuyPrice*100;
-let cokeProduceTime = cokeBuyPrice*100;
-let mdmaProduceTime = mdmaBuyPrice*100;
-
-//Drugs Cooking
-let cookArray = [];
-
-function drugCookDetection() {
-    for (let i = cookArray.length-1; i>=0; i--) {
-        cookArray[i].timer();
-        cookArray[i].timeRemaining();
-        cookArray[i].display();
-        if (cookArray[i].drugFinished && playerLabMenu && !labMenu1 && !labMenu2 && mouseX > cookArray[i].x-32 && mouseX < cookArray[i].x+32 && mouseY > height*0.4-32 && mouseY < height*0.4+32) {
-            heroinSellInventory++;
-            cookArray.splice(i,1);
-        }
-    }
-}
-
-//Drug Class
-class Heroin {
-    constructor() {
-        this.setup = true;
-        this.cookTimeRemaining = 0;
-        this.tempTimer = -1;
-        this.drugFinished = false;
-        this.x = 0;
-    }
-    timer() {
-        if (!this.drugFinished) {
-            if (this.setup === true) {
-                this.tempTimer = millis();
-                this.setup = false;
-            }  else
-            if (millis() - this.tempTimer >= heroinProduceTime) {
-                this.drugFinished = true;
-            }
-        }   
-    }
-    timeRemaining() {
-        if (!this.drugFinished) {
-            this.cookTimeRemaining = (millis() - this.tempTimer);
-        } else
-        this.cookTimeRemaining = "Done";
-    }
-    display() {
-        if (playerLabMenu && !labMenu1 && !labMenu2) {
-            //Display Drugs
-            image(heroinImg,this.x,height*0.4,64,64)
-            //Display Time Remaining
-            styling();
-            if (!this.drugFinished) {
-                text("Time Remaining",this.x,height*0.5);
-                text(ceil(heroinProduceTime-this.cookTimeRemaining)/1000,this.x,height*0.53);
-            } else
-            text("Product Ready",this.x,height*0.5);
-        }
-    }
-}
+    heroin = {
+        'name' : 'Heroin',
+        'buyinventory' : 5,
+        'sellinventory' : 5,
+        'buyprice' : 25,
+        'sellprice' : 50,
+        'prodtime' : 75000,
+        'image' : 'https://i.ibb.co/B6Mxh4q/Kanyle.png',
+        'x' : 0,
+        'y' : 0,
+    }, 
+    weed = {
+        'name' : 'Weed',
+        'buyinventory' : 5,
+        'sellinventory' : 5,
+        'buyprice' : 15,
+        'sellprice' : 30,
+        'prodtime' : 45000,
+        'image' : 'https://i.ibb.co/BfKddzg/weed.png',
+        'x' : 0,
+        'y' : 0,
+    }, 
+    coke = {
+        'name' : 'Coke',
+        'buyinventory' : 5,
+        'sellinventory' : 5,
+        'buyprice' : 45,
+        'sellprice' : 90,
+        'prodtime' : 135000,
+        'image' : 'https://i.ibb.co/Xk7dkr5/Coke-bag.png',
+        'x' : 0,
+        'y' : 0,
+    }, 
+    mdma = {
+        'name' : 'MDMA',
+        'buyinventory' : 5,
+        'sellinventory' : 5,
+        'buyprice' : 30,
+        'sellprice' : 60,
+        'prodtime' : 90000,
+        'image' : 'https://i.ibb.co/RP2cmSz/molly.png',
+        'x' : 0,
+        'y' : 0,
+    },
+    
+    ]
